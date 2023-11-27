@@ -32,5 +32,16 @@ blogsRouter.get('/',(request, response) => {
       response.status(204).json({message:'Delete Successfully'})
     })
   })
-
+  blogsRouter.put('/:id',(request,response)=>{
+    const id = request.params.id
+    const blog ={
+      title:request.body.title,
+      author:request.body.author,
+      likes:request.body.likes,
+      url:request.body.url
+    }
+    Blog.findByIdAndUpdate(id,blog).then(result=>{
+      response.status(200).json(result)
+    })
+  })
   module.exports=blogsRouter
