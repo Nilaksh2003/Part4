@@ -102,6 +102,17 @@ test('HttpPostRequest',async ()=>{
     expect(responseGet.body).toContainEqual(responsePost.body)
 
 })
+test('By default Likes id 0', async ()=>{
+    const newBlog = 
+    {
+        title:'testing',
+        author:'test',
+        url:''
+    };
+    const responsePost = await api.post('/api/blogs').send(newBlog).expect(201).expect('Content-Type','application/json; charset=utf-8')
+    expect(responsePost.body.likes).toBe(0)
+    
+})
 
 
 
