@@ -114,7 +114,14 @@ test('By default Likes id 0', async ()=>{
     
 })
 
-
+test('if the title or url properties are missing from the request data, the backend responds to the request with the status code 400 Bad Request.', async ()=>{
+    const newBlog = 
+    {
+        author:'test',
+        url:''
+    };
+    await api.post('/api/blogs').send(newBlog).expect(400)
+})
 
 afterAll(async () => {
   await mongoose.connection.close()

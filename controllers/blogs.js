@@ -14,6 +14,10 @@ blogsRouter.get('/',(request, response) => {
     {
       blog.likes=0
     }
+    if(blog.url===undefined||blog.title===undefined)
+    {
+      response.status(400).error({data:'Url or Title is missing'}).end()
+    }
     blog
       .save()
       .then(result => {
