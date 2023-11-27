@@ -88,6 +88,23 @@ test('should have id property instead of _id', async () => {
     expect(response.body[0].id).toBeDefined();
     expect(response.body[0]._id).toBeUndefined();
   });
+test('HttpPostRequest',async ()=>{
+    const newBlog = 
+    {
+        title:'testing',
+        author:'test',
+        url:'',
+        likes:5
+    };
+    const responsePost = await api.post('/api/blogs').send(newBlog).expect(201).expect('Content-Type','application/json; charset=utf-8')
+    const responseGet= await api.get('/api/blogs')
+    expect(responseGet.body).toHaveLength(initiaBlogs.length +1)
+    expect(responseGet.body).toContainEqual(responsePost.body)
+
+})
+
+
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
